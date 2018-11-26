@@ -8,9 +8,10 @@ build:
     - checkout
     - restore_cache:
         key: students-test-app-{{ .Branch }}-{{ checksum "package-lock.json" }}
-    - run: npm install
+    - run: 
+        command: npm install
     - save_cache:
         key: students-test-app-{{ .Branch }}-{{ checksum "package-lock.json" }}
         paths:
           - "node_modules"
-    - run: npm run students-test-app  --watch=false
+    #- run: npm run students-test-app  --watch=false
