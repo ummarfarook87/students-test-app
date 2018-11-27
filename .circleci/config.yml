@@ -1,17 +1,16 @@
 version: 2
 jobs:
 build:
-  working_directory: ~/students-test-app
+  working_directory: ~/student-test
   docker:
     - image: circleci/node:8-browsers
   steps:
     - checkout
     - restore_cache:
-        key: students-test-app-{{ .Branch }}-{{ checksum "package-lock.json" }}
-    - run: 
-        command: npm install
+        key: student-test-{{ .Branch }}-{{ checksum "package-lock.json" }}
+    - run: npm install
     - save_cache:
-        key: students-test-app-{{ .Branch }}-{{ checksum "package-lock.json" }}
+        key: student-test-{{ .Branch }}-{{ checksum "package-lock.json" }}
         paths:
           - "node_modules"
-    - run: npm run test  --watch=false
+    - run: npm run test -- --watch=false
